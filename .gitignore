@@ -1,0 +1,4 @@
+assets/*
+output/*
+!*/.gitkeep
+.DS_Store

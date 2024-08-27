@@ -5,9 +5,23 @@ Configuration for creating a bootc-based image with the Falcon sensor installed.
 This is an example that users should adapt to their bootc workflow. The resulting image will be
 associated with a specific customer ID (CID). Upon startup, the host will generate a new agent ID (AID).
 
+## Support
+
+falcon-bootc is an open source project, not a CrowdStrike product. As such, it carries no formal support, expressed or implied.
+
 ## Prerequisites
 
-Only tested on ARM Macs so far.
+### RHEL setup
+
+1. Install Podman
+2. Log in to the Red Hat registry:
+
+```bash
+podman login registry.redhat.io
+# enter your Red Hat login
+```
+
+### Mac setup
 
 1. Install Podman
 2. Create a Podman machine with rootful and a volume mount:

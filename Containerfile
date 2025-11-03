@@ -1,4 +1,4 @@
-FROM registry.redhat.io/rhel9/rhel-bootc:9.4
+FROM registry.redhat.io/rhel9/rhel-bootc:9.6
 # FROM quay.io/centos-bootc/centos-bootc:stream9
 
 ARG FALCON_CID

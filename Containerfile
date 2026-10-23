@@ -17,10 +17,21 @@ test -d /var/opt || mkdir /var/opt
 mv /opt/CrowdStrike /var/opt/CrowdStrike
 ln -s /var/opt/CrowdStrike /opt/CrowdStrike
 
-# set selinux contexts to match what they would be inside of /opt/CrowdStrike
-dnf -y install policycoreutils-devel
-semanage fcontext -a -t usr_t "/var/opt/CrowdStrike(/.*)?"
-semanage fcontext -a -N -t lib_t "/var/opt/CrowdStrike/.*\.so(\.[^/]*)*"
+# set selinux contexts to match what they would be inside of /opt/CrowdStrike,
+# but only where the distro policy does not already do it. RHEL 10 ships a
+# "/var/opt /opt" file context equivalency that RHEL 9 does not, and adding a
+# rule that collides with an equivalency is an error, not a no-op, so these
+# calls abort the build there. Comparing the two labels tests the outcome
+# rather than the distro version, so it stays correct if RHEL 9 ever gains the
+# same equivalency. matchpathcon is in the base image, so this runs before the
+# install it guards.
+if [ "$(matchpathcon -n /var/opt)" = "$(matchpathcon -n /opt)" ]; then
+    echo "distro policy already labels /var/opt as /opt; skipping semanage"
+else
+    dnf -y install policycoreutils-devel
+    semanage fcontext -a -t usr_t "/var/opt/CrowdStrike(/.*)?"
+    semanage fcontext -a -N -t lib_t "/var/opt/CrowdStrike/.*\.so(\.[^/]*)*"
+fi
 
 # workaround: allow service to restart briefly on failure (fatal issue where pidfile can't be created on first boot)
 sed -i 's/\[Unit\]/\[Unit\]\nStartLimitIntervalSec=10/' /usr/lib/systemd/system/falcon-sensor.service

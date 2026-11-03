@@ -10,7 +10,7 @@ set -euxo pipefail
 
 # install falcon sensor
 rpm --import /tmp/assets/*.gpg
-dnf -y install /tmp/assets/*.rpm
+dnf -y --setopt=localpkg_gpgcheck=1 install /tmp/assets/*.rpm
 
 # /opt is not writable on image-mode RHEL so move to /var/opt/CrowdStrike
 test -d /var/opt || mkdir /var/opt

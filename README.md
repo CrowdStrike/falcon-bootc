@@ -6,7 +6,7 @@
 
 Configuration for creating a bootc-based image with the Falcon sensor installed.
 
-This is an example that users should adapt to their bootc workflow. The resulting image will be
+The `Containerfile` and `config.toml` are _examples_ that users must adapt to their own bootc workflows. The resulting image will be
 associated with a specific customer ID (CID). Upon startup, the host will generate a new agent ID (AID).
 
 ## Support

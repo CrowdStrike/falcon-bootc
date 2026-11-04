@@ -1,4 +1,4 @@
 [[blueprint.customizations.user]]
 name = "admin"
-password = "in$ecur3"
+password = "$6$a/ttdxJNlFSyDIdJ$qGKqP5eHf1OBtgQdawvwnzJP.x36zyVP/H3J0zxtBxssy32OfrgFNGhYa15zS3z04inAnGeesw1.6vMvaiO8x0"
 groups = ["wheel"]

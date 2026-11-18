@@ -56,10 +56,11 @@ The `Containerfile` builds against a RHEL 9 base by default. A RHEL 10 base also
 change the `FROM` line. The SELinux relabeling step is skipped automatically on RHEL 10,
 where the distro policy already equates `/var/opt` with `/opt`.
 
+1. Update `config.toml` with a login credential, and any other desired customizations. See the [Image Builder docs](https://osbuild.org/docs/user-guide/blueprint-reference/).
 1. Download a GPG key and RPM that matches the system's architecture and place them in `assets`. Note: the `Containerfile` installs any `*.gpg` and `*.rpm` file found, so ensure the files match this convention.
-2. Retrieve your CID and set as as environment variable: `FALCON_CID=abcd1234`
-3. Build the container image: `podman build --build-arg FALCON_CID=$FALCON_CID -t falcon-bootc-demo:latest .`
-4. Build the bootable image:
+1. Retrieve your CID and set as as environment variable: `FALCON_CID=abcd1234`
+1. Build the container image: `podman build --build-arg FALCON_CID=$FALCON_CID -t falcon-bootc-demo:latest .`
+1. Build the bootable image:
 
 ```
 podman run \
